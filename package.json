@@ -15,6 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "beautiful-react-hooks": "^0.30.1",
+    "date-fns": "^2.16.1",
     "jss-preset-default": "^10.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

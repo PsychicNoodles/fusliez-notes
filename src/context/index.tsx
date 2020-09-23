@@ -1,4 +1,4 @@
-import { IData, IDataContext, IPlayer, ITheme } from "utils/types";
+import { IData, IDataContext, IPlayer, IRoundLog, ITheme } from "utils/types";
 
 import React from "react";
 import { Themes } from "themes/themes";
@@ -36,6 +36,7 @@ const initialData: IData = {
     { id: "yellow", name: "", color: "yellow" },
   ],
   notes: "",
+  mapLogs: [],
 };
 
 const localData = localStorage.getItem(`${namespace}data`);
@@ -80,6 +81,10 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
       : initialData.unknownPlayers
   );
 
+  const [mapLogs, setLocalMapLogs] = React.useState<Array<IRoundLog>>(
+    data?.mapLogs.length ? data.mapLogs : initialData.mapLogs
+  );
+
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
 
   function resetRound() {
@@ -97,6 +102,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
     setLocalEvilPlayers([]);
     setLocalDeadPlayers([]);
     setLocalNotes("");
+    setLocalMapLogs([]);
 
     localStorage.setItem(
       `${namespace}data`,
@@ -118,6 +124,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
     setLocalSusPlayers([]);
     setLocalEvilPlayers([]);
     setLocalDeadPlayers([]);
+    setLocalMapLogs([]);
 
     localStorage.setItem(`${namespace}data`, JSON.stringify(initialData));
   }

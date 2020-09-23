@@ -6,6 +6,16 @@ export interface IPlayer extends ItemInterface {
   color: string;
 }
 
+export interface IRoundLog {
+  roundStart: Date;
+  logs: Array<IMapLog>;
+}
+
+export interface IMapLog {
+  player: IPlayer;
+  timestamp: Date;
+}
+
 export interface ITheme {
   name: string;
 
@@ -60,4 +70,5 @@ export interface IData {
   deadPlayers: Array<IPlayer>;
   unknownPlayers: Array<IPlayer>;
   notes: string;
+  mapLogs: Array<IMapLog>;
 }
