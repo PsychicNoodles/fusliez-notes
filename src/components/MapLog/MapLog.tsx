@@ -5,8 +5,8 @@ import Button from "components/common/Button";
 import { formatRelative } from "date-fns";
 
 export default function MapLog(): JSX.Element {
-  const [roundNumber, setRoundNumber] = React.useState(0);
   const { mapLogs, setMapLogs } = useData()!; // eslint-disable-line
+  const [roundNumber, setRoundNumber] = React.useState(mapLogs.length - 1);
 
   const currentRound = mapLogs[roundNumber];
 
@@ -24,10 +24,19 @@ export default function MapLog(): JSX.Element {
     }
   };
 
-  const formatPosition = ({ x, y }: { x: number; y: number }) => "test";
+  const newRound = () => {
+    setMapLogs([...mapLogs, { logs: [], roundStart: new Date() }]);
+    setRoundNumber(roundNumber + 1);
+  };
+
+  const formatPosition = ({ x, y }: { x: number; y: number }) =>
+    `at ${x}, ${y}`;
 
   return (
     <div className={classes.root}>
+      <Button className={classes.newRoundButton} onClick={newRound}>
+        New Round
+      </Button>
       <div className={classes.roundSelectorContainer}>
         <Button
           className={classes.roundSelectorButton}
