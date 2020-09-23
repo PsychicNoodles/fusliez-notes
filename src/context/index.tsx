@@ -87,7 +87,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
 
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
 
-  function resetRound() {
+  function resetGame() {
     const currentPlayers = [
       ...innocentPlayers,
       ...susPlayers,
@@ -166,7 +166,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
         deadPlayers,
         unknownPlayers,
         notes,
-        resetRound,
+        resetGame,
         resetAll,
         setTheme: (value: ITheme) => {
           const localData = localStorage.getItem(`${namespace}data`);

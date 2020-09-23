@@ -45,7 +45,7 @@ export interface IDataContext {
   deadPlayers: Array<IPlayer>;
   unknownPlayers: Array<IPlayer>;
   notes: string;
-  resetRound: () => void;
+  resetGame: () => void;
   resetAll: () => void;
   setTheme: (value: ITheme) => void;
   setWins: (value: number) => void;
