@@ -13,6 +13,7 @@ export interface IRoundLog {
 
 export interface IPlayerLog {
   player: IPlayer;
+  position: { x: number; y: number };
   timestamp: Date;
 }
 

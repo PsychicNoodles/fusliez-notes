@@ -3,6 +3,7 @@ import React from "react";
 import useStyles from "./MapsContent.styles";
 import FeedbackForm from "../FeedbackForm";
 import Button from "components/common/Button";
+import MapLog from "components/MapLog/MapLog";
 
 export default function MapsContent(): JSX.Element {
   const [map, setMap] = React.useState("skeld");
@@ -91,6 +92,9 @@ export default function MapsContent(): JSX.Element {
                 />
               </Draggable>
             ))}
+          </div>
+          <div className={classes.wrapper}>
+            <MapLog />
           </div>
         </>
       ) : (
