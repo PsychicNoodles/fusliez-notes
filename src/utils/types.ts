@@ -8,10 +8,10 @@ export interface IPlayer extends ItemInterface {
 
 export interface IRoundLog {
   roundStart: Date;
-  logs: Array<IMapLog>;
+  logs: Array<IPlayerLog>;
 }
 
-export interface IMapLog {
+export interface IPlayerLog {
   player: IPlayer;
   timestamp: Date;
 }
