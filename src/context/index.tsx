@@ -166,6 +166,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
         deadPlayers,
         unknownPlayers,
         notes,
+        mapLogs,
         resetGame,
         resetAll,
         setTheme: (value: ITheme) => {
@@ -306,6 +307,19 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
             localStorage.setItem(`${namespace}data`, JSON.stringify(data));
 
             setLocalNotes(value);
+          }
+        },
+        setMapLogs: (value: Array<IRoundLog>) => {
+          const localData = localStorage.getItem(`${namespace}data`);
+
+          if (localData) {
+            const data: IData = JSON.parse(localData);
+
+            data.mapLogs = value;
+
+            localStorage.setItem(`${namespace}data`, JSON.stringify(data));
+
+            setLocalMapLogs(value);
           }
         },
       }}

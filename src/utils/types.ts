@@ -45,6 +45,7 @@ export interface IDataContext {
   deadPlayers: Array<IPlayer>;
   unknownPlayers: Array<IPlayer>;
   notes: string;
+  mapLogs: Array<IRoundLog>;
   resetGame: () => void;
   resetAll: () => void;
   setTheme: (value: ITheme) => void;
@@ -57,6 +58,7 @@ export interface IDataContext {
   setDeadPlayers: (value: Array<IPlayer>) => void;
   setUnknownPlayers: (value: Array<IPlayer>) => void;
   setNotes: (value: string) => void;
+  setMapLogs: (value: Array<IRoundLog>) => void;
 }
 
 export interface IData {
@@ -70,5 +72,5 @@ export interface IData {
   deadPlayers: Array<IPlayer>;
   unknownPlayers: Array<IPlayer>;
   notes: string;
-  mapLogs: Array<IMapLog>;
+  mapLogs: Array<IRoundLog>;
 }
