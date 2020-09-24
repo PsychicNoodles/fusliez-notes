@@ -16,7 +16,8 @@ export default function MapLog(): JSX.Element {
   } = useData()!; // eslint-disable-line
   const [roundNumber, setRoundNumber] = React.useState(mapLogs.length - 1);
 
-  const currentRound = mapLogs[roundNumber];
+  const currentRoundLogs = mapLogs.filter(({ round }) => round === roundNumber);
+  const currentRoundStart = roundStartTimes[roundNumber];
 
   const classes = useStyles({});
 
@@ -83,8 +84,8 @@ export default function MapLog(): JSX.Element {
         </Button>
       </div>
       <div className={classes.logContainer}>
-        {currentRound &&
-          currentRound.logs.map(({ player, position, timestamp }) => (
+        {currentRoundLogs &&
+          currentRoundLogs.map(({ player, position, timestamp }) => (
             <div className={classes.logRow}>
               <img
                 className={classes.logPlayerImage}
@@ -95,7 +96,7 @@ export default function MapLog(): JSX.Element {
                 {formatPosition(position)}
               </div>
               <div className={classes.logPlayerTimestamp}>
-                {formatRelative(timestamp, currentRound.roundStart)}
+                {formatRelative(timestamp, currentRoundStart)}
               </div>
             </div>
           ))}
