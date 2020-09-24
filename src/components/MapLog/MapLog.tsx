@@ -13,15 +13,11 @@ export default function MapLog(): JSX.Element {
   const classes = useStyles({});
 
   const backRound = () => {
-    if (roundNumber > 1) {
-      setRoundNumber(roundNumber - 1);
-    }
+    setRoundNumber(roundNumber - 1);
   };
 
   const forwardRound = () => {
-    if (roundNumber < mapLogs.length - 1) {
-      setRoundNumber(roundNumber + 1);
-    }
+    setRoundNumber(roundNumber + 1);
   };
 
   const newRound = () => {
