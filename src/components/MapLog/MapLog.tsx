@@ -12,25 +12,11 @@ export default function MapLog(): JSX.Element {
     setMapLogs,
     roundStartTimes,
     setRoundStartTimes,
+    allPlayers,
   } = useData()!; // eslint-disable-line
   const [roundNumber, setRoundNumber] = React.useState(mapLogs.length - 1);
 
   const currentRound = mapLogs[roundNumber];
-
-  const players = [
-    "blue",
-    "brown",
-    "gray",
-    "green",
-    "lightGreen",
-    "orange",
-    "pink",
-    "purple",
-    "red",
-    "teal",
-    "white",
-    "yellow",
-  ];
 
   const classes = useStyles({});
 
@@ -56,20 +42,20 @@ export default function MapLog(): JSX.Element {
     timestamp: Date,
     round: number
   ) => {
-    setMapLogs();
+    setMapLogs([...mapLogs, { player, position, timestamp, round }]);
   };
 
   return (
     <div className={classes.root}>
-      {players.map((player) => (
+      {allPlayers.map((player) => (
         <Draggable
-          key={player}
+          key={player.id}
           bounds="parent"
           onStop={(e, data) => addLog(player, data, new Date(), roundNumber)}
         >
           <img
             className="player-handle"
-            src={`assets/${player}.png`}
+            src={`assets/${player.id}.png`}
             draggable={false}
           />
         </Draggable>
