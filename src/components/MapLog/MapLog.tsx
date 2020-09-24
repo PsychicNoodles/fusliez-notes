@@ -1,14 +1,36 @@
 import React from "react";
+import Draggable from "react-draggable";
 import { useData } from "context";
 import useStyles from "./MapLog.styles";
 import Button from "components/common/Button";
 import { formatRelative } from "date-fns";
+import { IPlayer } from "utils/types";
 
 export default function MapLog(): JSX.Element {
-  const { mapLogs, setMapLogs } = useData()!; // eslint-disable-line
+  const {
+    mapLogs,
+    setMapLogs,
+    roundStartTimes,
+    setRoundStartTimes,
+  } = useData()!; // eslint-disable-line
   const [roundNumber, setRoundNumber] = React.useState(mapLogs.length - 1);
 
   const currentRound = mapLogs[roundNumber];
+
+  const players = [
+    "blue",
+    "brown",
+    "gray",
+    "green",
+    "lightGreen",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "teal",
+    "white",
+    "yellow",
+  ];
 
   const classes = useStyles({});
 
@@ -21,15 +43,37 @@ export default function MapLog(): JSX.Element {
   };
 
   const newRound = () => {
-    setMapLogs([...mapLogs, { logs: [], roundStart: new Date() }]);
-    setRoundNumber(roundNumber + 1);
+    setRoundStartTimes([...roundStartTimes, new Date()]);
+    setRoundNumber(roundStartTimes.length);
   };
 
   const formatPosition = ({ x, y }: { x: number; y: number }) =>
     `at ${x}, ${y}`;
 
+  const addLog = (
+    player: IPlayer,
+    position: { x: number; y: number },
+    timestamp: Date,
+    round: number
+  ) => {
+    setMapLogs();
+  };
+
   return (
     <div className={classes.root}>
+      {players.map((player) => (
+        <Draggable
+          key={player}
+          bounds="parent"
+          onStop={(e, data) => addLog(player, data, new Date(), roundNumber)}
+        >
+          <img
+            className="player-handle"
+            src={`assets/${player}.png`}
+            draggable={false}
+          />
+        </Draggable>
+      ))}
       <Button className={classes.newRoundButton} onClick={newRound}>
         New Round
       </Button>
@@ -46,7 +90,7 @@ export default function MapLog(): JSX.Element {
         </div>
         <Button
           className={classes.roundSelectorButton}
-          disabled={roundNumber === mapLogs.length - 1}
+          disabled={roundNumber === roundStartTimes.length - 1}
           onClick={forwardRound}
         >
           &gt;

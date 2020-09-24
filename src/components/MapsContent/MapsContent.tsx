@@ -1,4 +1,3 @@
-import Draggable from "react-draggable";
 import React from "react";
 import useStyles from "./MapsContent.styles";
 import FeedbackForm from "../FeedbackForm";
@@ -8,21 +7,6 @@ import MapLog from "components/MapLog/MapLog";
 export default function MapsContent(): JSX.Element {
   const [map, setMap] = React.useState("skeld");
   const [currentTab, setCurrentTab] = React.useState("Maps");
-
-  const players = [
-    "blue",
-    "brown",
-    "gray",
-    "green",
-    "lightGreen",
-    "orange",
-    "pink",
-    "purple",
-    "red",
-    "teal",
-    "white",
-    "yellow",
-  ];
 
   const classes = useStyles({
     map: map == "skeld" ? "TheSkeld" : map == "mira" ? "Mirahq" : "Polus",
@@ -82,16 +66,6 @@ export default function MapsContent(): JSX.Element {
               className={classes.map}
               draggable={false}
             />
-
-            {players.map((player) => (
-              <Draggable key={player} bounds="parent">
-                <img
-                  className="player-handle"
-                  src={`assets/${player}.png`}
-                  draggable={false}
-                />
-              </Draggable>
-            ))}
           </div>
           <div className={classes.wrapper}>
             <MapLog />

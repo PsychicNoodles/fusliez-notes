@@ -36,6 +36,7 @@ const initialData: IData = {
     { id: "yellow", name: "", color: "yellow" },
   ],
   notes: "",
+  roundStartTimes: [],
   mapLogs: [],
 };
 
@@ -79,6 +80,14 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
     data?.unknownPlayers.length
       ? data.unknownPlayers
       : initialData.unknownPlayers
+  );
+
+  const [roundStartTimes, setLocalRoundStartTimes] = React.useState<
+    Array<Date>
+  >(
+    data?.roundStartTimes.length
+      ? data.roundStartTimes
+      : initialData.roundStartTimes
   );
 
   const [mapLogs, setLocalMapLogs] = React.useState<Array<IRoundLog>>(
@@ -166,6 +175,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
         deadPlayers,
         unknownPlayers,
         notes,
+        roundStartTimes,
         mapLogs,
         resetGame,
         resetAll,
@@ -307,6 +317,19 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
             localStorage.setItem(`${namespace}data`, JSON.stringify(data));
 
             setLocalNotes(value);
+          }
+        },
+        setRoundStartTimes: (value: Array<Date>) => {
+          const localData = localStorage.getItem(`${namespace}data`);
+
+          if (localData) {
+            const data: IData = JSON.parse(localData);
+
+            data.roundStartTimes = value;
+
+            localStorage.setItem(`${namespace}data`, JSON.stringify(data));
+
+            setLocalRoundStartTimes(value);
           }
         },
         setMapLogs: (value: Array<IRoundLog>) => {
