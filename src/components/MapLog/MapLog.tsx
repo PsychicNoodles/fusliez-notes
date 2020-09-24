@@ -93,7 +93,7 @@ export default function MapLog(): JSX.Element {
       <div className={classes.logContainer}>
         {currentRoundLogs &&
           currentRoundLogs.map(({ player, position, timestamp }) => (
-            <div className={classes.logRow}>
+            <div className={classes.logRow} key={`${player.id}-${timestamp}`}>
               <img
                 className={classes.logPlayerImage}
                 src={`assets/${player.color}`}
