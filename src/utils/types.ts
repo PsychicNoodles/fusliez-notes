@@ -41,6 +41,7 @@ export interface IDataContext {
   evilPlayers: Array<IPlayer>;
   deadPlayers: Array<IPlayer>;
   unknownPlayers: Array<IPlayer>;
+  allPlayers: Array<IPlayer>;
   notes: string;
   roundStartTimes: Array<Date>;
   mapLogs: Array<IRoundLog>;

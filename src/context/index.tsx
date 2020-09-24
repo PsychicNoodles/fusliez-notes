@@ -82,6 +82,14 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
       : initialData.unknownPlayers
   );
 
+  const allPlayers = [
+    ...innocentPlayers,
+    ...susPlayers,
+    ...evilPlayers,
+    ...deadPlayers,
+    ...unknownPlayers,
+  ];
+
   const [roundStartTimes, setLocalRoundStartTimes] = React.useState<
     Array<Date>
   >(
@@ -97,15 +105,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
 
   function resetGame() {
-    const currentPlayers = [
-      ...innocentPlayers,
-      ...susPlayers,
-      ...evilPlayers,
-      ...deadPlayers,
-      ...unknownPlayers,
-    ];
-
-    setLocalUnknownPlayers(currentPlayers);
+    setLocalUnknownPlayers(allPlayers);
     setLocalInnocentPlayers([]);
     setLocalSusPlayers([]);
     setLocalEvilPlayers([]);
@@ -117,7 +117,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
       `${namespace}data`,
       JSON.stringify({
         ...initialData,
-        unknownPlayers: currentPlayers,
+        unknownPlayers: allPlayers,
       })
     );
   }
@@ -174,6 +174,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
         evilPlayers,
         deadPlayers,
         unknownPlayers,
+        allPlayers,
         notes,
         roundStartTimes,
         mapLogs,
