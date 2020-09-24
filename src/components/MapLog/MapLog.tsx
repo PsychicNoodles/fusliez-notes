@@ -69,7 +69,7 @@ export default function MapLog(): JSX.Element {
       <div className={classes.roundSelectorContainer}>
         <Button
           className={classes.roundSelectorButton}
-          disabled={roundNumber === 0}
+          disabled={roundNumber === -1}
           onClick={backRound}
         >
           &lt;
