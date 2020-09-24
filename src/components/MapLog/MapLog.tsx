@@ -96,7 +96,7 @@ export default function MapLog(): JSX.Element {
             <div className={classes.logRow} key={`${player.id}-${timestamp}`}>
               <img
                 className={classes.logPlayerImage}
-                src={`assets/${player.color}`}
+                src={`assets/${player.id}.png`}
               />
               <div className={classes.logPlayerName}>{player.name}</div>
               <div className={classes.logPlayerPosition}>
