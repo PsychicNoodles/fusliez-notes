@@ -91,7 +91,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
   ];
 
   const [roundStartTimes, setLocalRoundStartTimes] = React.useState<
-    Array<Date>
+    Array<number>
   >(
     data?.roundStartTimes.length
       ? data.roundStartTimes
@@ -320,7 +320,7 @@ export const DataProvider = ({ children }: IDataProviderProps): JSX.Element => {
             setLocalNotes(value);
           }
         },
-        setRoundStartTimes: (value: Array<Date>) => {
+        setRoundStartTimes: (value: Array<number>) => {
           const localData = localStorage.getItem(`${namespace}data`);
 
           if (localData) {

@@ -10,7 +10,7 @@ export interface IRoundLog {
   round: number;
   player: IPlayer;
   position: { x: number; y: number };
-  timestamp: Date;
+  timestamp: number;
 }
 
 export interface ITheme {
@@ -43,7 +43,7 @@ export interface IDataContext {
   unknownPlayers: Array<IPlayer>;
   allPlayers: Array<IPlayer>;
   notes: string;
-  roundStartTimes: Array<Date>;
+  roundStartTimes: Array<number>;
   mapLogs: Array<IRoundLog>;
   resetGame: () => void;
   resetAll: () => void;
@@ -57,7 +57,7 @@ export interface IDataContext {
   setDeadPlayers: (value: Array<IPlayer>) => void;
   setUnknownPlayers: (value: Array<IPlayer>) => void;
   setNotes: (value: string) => void;
-  setRoundStartTimes: (value: Array<Date>) => void;
+  setRoundStartTimes: (value: Array<number>) => void;
   setMapLogs: (value: Array<IRoundLog>) => void;
 }
 
@@ -72,6 +72,6 @@ export interface IData {
   deadPlayers: Array<IPlayer>;
   unknownPlayers: Array<IPlayer>;
   notes: string;
-  roundStartTimes: Array<Date>;
+  roundStartTimes: Array<number>;
   mapLogs: Array<IRoundLog>;
 }

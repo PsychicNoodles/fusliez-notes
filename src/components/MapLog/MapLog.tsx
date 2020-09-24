@@ -30,7 +30,7 @@ export default function MapLog(): JSX.Element {
   };
 
   const newRound = () => {
-    setRoundStartTimes([...roundStartTimes, new Date()]);
+    setRoundStartTimes([...roundStartTimes, Date.now()]);
     setRoundNumber(roundStartTimes.length);
   };
 
@@ -40,7 +40,7 @@ export default function MapLog(): JSX.Element {
   const addLog = (
     player: IPlayer,
     position: { x: number; y: number },
-    timestamp: Date,
+    timestamp: number,
     round: number
   ) => {
     setMapLogs([...mapLogs, { player, position, timestamp, round }]);
@@ -53,7 +53,7 @@ export default function MapLog(): JSX.Element {
           key={player.id}
           bounds="parent"
           onStop={(e, { x, y }) =>
-            addLog(player, { x, y }, new Date(), roundNumber)
+            addLog(player, { x, y }, Date.now(), roundNumber)
           }
         >
           <img
