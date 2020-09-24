@@ -52,7 +52,9 @@ export default function MapLog(): JSX.Element {
         <Draggable
           key={player.id}
           bounds="parent"
-          onStop={(e, data) => addLog(player, data, new Date(), roundNumber)}
+          onStop={(e, { x, y }) =>
+            addLog(player, { x, y }, new Date(), roundNumber)
+          }
         >
           <img
             className="player-handle"
