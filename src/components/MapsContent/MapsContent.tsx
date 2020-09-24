@@ -1,12 +1,42 @@
 import React from "react";
+import Draggable from "react-draggable";
 import useStyles from "./MapsContent.styles";
 import FeedbackForm from "../FeedbackForm";
 import Button from "components/common/Button";
 import MapLog from "components/MapLog/MapLog";
+import { useData } from "context";
+import { IPlayer } from "utils/types";
 
 export default function MapsContent(): JSX.Element {
   const [map, setMap] = React.useState("skeld");
   const [currentTab, setCurrentTab] = React.useState("Maps");
+
+  const {
+    mapLogs,
+    setMapLogs,
+    roundStartTimes,
+    setRoundStartTimes,
+    allPlayers,
+  } = useData()!; // eslint-disable-line
+  const [roundNumber, setRoundNumber] = React.useState(mapLogs.length - 1);
+
+  const startNewRound = () => {
+    setRoundStartTimes([...roundStartTimes, Date.now()]);
+    setRoundNumber(roundStartTimes.length);
+  };
+  const addLog = (
+    player: IPlayer,
+    position: { x: number; y: number },
+    timestamp: number,
+    round: number
+  ) => {
+    if (roundNumber === -1) {
+      startNewRound();
+      setMapLogs([...mapLogs, { player, position, timestamp, round: 0 }]);
+    } else {
+      setMapLogs([...mapLogs, { player, position, timestamp, round }]);
+    }
+  };
 
   const classes = useStyles({
     map: map == "skeld" ? "TheSkeld" : map == "mira" ? "Mirahq" : "Polus",
@@ -66,9 +96,29 @@ export default function MapsContent(): JSX.Element {
               className={classes.map}
               draggable={false}
             />
+            {allPlayers.map((player) => (
+              <Draggable
+                key={player.id}
+                bounds="parent"
+                onStop={(_, { x, y }) =>
+                  addLog(player, { x, y }, Date.now(), roundNumber)
+                }
+              >
+                <img
+                  className="player-handle"
+                  src={`assets/${player.id}.png`}
+                  draggable={false}
+                />
+              </Draggable>
+            ))}
           </div>
           <div className={classes.wrapper}>
-            <MapLog />
+            <MapLog
+              roundNumber={roundNumber}
+              goBackRound={() => setRoundNumber(roundNumber - 1)}
+              goForwardRound={() => setRoundNumber(roundNumber + 1)}
+              startNewRound={startNewRound}
+            />
           </div>
         </>
       ) : (
