@@ -43,7 +43,12 @@ export default function MapLog(): JSX.Element {
     timestamp: number,
     round: number
   ) => {
-    setMapLogs([...mapLogs, { player, position, timestamp, round }]);
+    if (roundNumber === -1) {
+      newRound();
+      setMapLogs([...mapLogs, { player, position, timestamp, round: 0 }]);
+    } else {
+      setMapLogs([...mapLogs, { player, position, timestamp, round }]);
+    }
   };
 
   return (
@@ -69,7 +74,7 @@ export default function MapLog(): JSX.Element {
       <div className={classes.roundSelectorContainer}>
         <Button
           className={classes.roundSelectorButton}
-          disabled={roundNumber === -1}
+          disabled={roundNumber <= 0}
           onClick={backRound}
         >
           &lt;
